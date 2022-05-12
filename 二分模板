@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int f[100005];
+int n,q,k;
+
+int main()
+{
+	scanf("%d%d",&n,&q);
+	for(int i=0;i<n;i++)
+		scanf("%d",&f[i]);
+	while(q--)
+	{
+		scanf("%d",&k);
+    //最小下标
+		int low=0;
+		int high=n-1;
+		while(low<high)
+		{
+			int mid=(low+high)/2;
+			if(f[mid]>=k)
+				high=mid;
+			else
+				low=mid+1;
+		}
+		if(f[high]!=k)
+		{
+			printf("-1 -1\n");
+			continue;
+		}
+    //最大下标
+		int low1=0;
+		int high1=n-1;
+		while(low1+1<high1)
+		{
+			int mid=(low1+high1)/2;
+			if(f[mid]<=k)
+				low1=mid;
+			else
+				high1=mid;
+		}
+		printf("%d %d\n",low,low1);
+	}
+}
